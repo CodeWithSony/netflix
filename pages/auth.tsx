@@ -66,7 +66,7 @@ export default function Auth() {
             <p className="text-neutral-500 mt-12 ">
               {variant == 'login' ? 'First time using Netflix?': 'already have an account'}
               <span onClick={toggleVariant} className="text-white ml-1 hover: underline cursor-pointer">
-                {variant == 'login' ? 'create and account': 'Login' }
+                {variant == 'login' ? 'create and account': 'Loginn' }
               </span>
             </p>
           </div>
