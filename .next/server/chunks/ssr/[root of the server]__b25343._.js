@@ -172,7 +172,7 @@ function Auth() {
                                 className: "text-white text-4xl mb-8 font-semibold",
                                 children: [
                                     " ",
-                                    variant == 'login' ? 'Sign in' : 'Resister',
+                                    variant == "login" ? "Sign in" : "Resister",
                                     " "
                                 ]
                             }, void 0, true, {
@@ -183,7 +183,7 @@ function Auth() {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
                                 className: "flex flex-col gap-4 ",
                                 children: [
-                                    variant == 'Resister' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Input$2e$tsx__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                    variant == "Resister" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Input$2e$tsx__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         label: "username",
                                         onChange: (ev)=>{
                                             setName(ev.target.value);
@@ -193,8 +193,8 @@ function Auth() {
                                         value: name
                                     }, void 0, false, {
                                         fileName: "[project]/pages/auth.tsx",
-                                        lineNumber: 34,
-                                        columnNumber: 15
+                                        lineNumber: 37,
+                                        columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Input$2e$tsx__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         label: "email",
@@ -206,7 +206,7 @@ function Auth() {
                                         value: email
                                     }, void 0, false, {
                                         fileName: "[project]/pages/auth.tsx",
-                                        lineNumber: 44,
+                                        lineNumber: 47,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Input$2e$tsx__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -219,40 +219,40 @@ function Auth() {
                                         value: password
                                     }, void 0, false, {
                                         fileName: "[project]/pages/auth.tsx",
-                                        lineNumber: 53,
+                                        lineNumber: 56,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/pages/auth.tsx",
-                                lineNumber: 32,
+                                lineNumber: 35,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
                                 className: "bg-red-600 py-3 text-white rounded-md w-full mt-10 focus:bg-red-700 transition",
-                                children: variant == 'login' ? 'Login' : 'Sign up'
+                                children: variant == "login" ? "Login" : "Sign up"
                             }, void 0, false, {
                                 fileName: "[project]/pages/auth.tsx",
-                                lineNumber: 63,
+                                lineNumber: 66,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
                                 className: "text-neutral-500 mt-12 ",
                                 children: [
-                                    variant == 'login' ? 'First time using Netflix?' : 'already have an account',
+                                    variant == "login" ? "First time using Netflix?" : "already have an account",
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
                                         onClick: toggleVariant,
                                         className: "text-white ml-1 hover: underline cursor-pointer",
-                                        children: variant == 'login' ? 'create and account' : 'Login'
+                                        children: variant == "login" ? "create and account" : "Login"
                                     }, void 0, false, {
                                         fileName: "[project]/pages/auth.tsx",
-                                        lineNumber: 68,
+                                        lineNumber: 73,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/pages/auth.tsx",
-                                lineNumber: 66,
+                                lineNumber: 69,
                                 columnNumber: 13
                             }, this)
                         ]
