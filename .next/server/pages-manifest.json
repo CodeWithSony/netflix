@@ -3,6 +3,6 @@
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
   "/auth": "pages/auth.js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/api/register": "pages/api/register.js"
+  "/api/register": "pages/api/register.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js"
 }
