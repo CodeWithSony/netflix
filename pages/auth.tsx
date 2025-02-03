@@ -26,7 +26,7 @@ export default function Auth() {
             className="bg-white"
           />
         </nav>
-        <div className="flex justify-center ">
+        <div className="flex justify-center items-center">
           <div className="bg-black  px-16 py-16 self self-center mt-2 lg:w-2/5 lg:max-md bg-opacity-70">
             <h2 className="text-white text-4xl mb-8 font-semibold">
               {" "}
