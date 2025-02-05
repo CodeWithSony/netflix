@@ -348,6 +348,10 @@ img, video {
   margin-top: .5rem;
 }
 
+.mt-8 {
+  margin-top: 2rem;
+}
+
 .block {
   display: block;
 }
@@ -356,8 +360,16 @@ img, video {
   display: flex;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
 .h-full {
   height: 100%;
+}
+
+.w-10 {
+  width: 2.5rem;
 }
 
 .w-full {
@@ -388,6 +400,10 @@ img, video {
   appearance: none;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -406,6 +422,10 @@ img, video {
 
 .self-center {
   align-self: center;
+}
+
+.rounded-full {
+  border-radius: 9999px;
 }
 
 .rounded-md {
@@ -535,6 +555,10 @@ body {
 
 html {
   height: 100%;
+}
+
+.hover\:opacity-80:hover {
+  opacity: .8;
 }
 
 .focus\:bg-red-700:focus {

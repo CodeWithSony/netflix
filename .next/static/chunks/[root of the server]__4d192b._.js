@@ -615,12 +615,23 @@ __turbopack_esm__({
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react/jsx-dev-runtime.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Input$2e$tsx__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/components/Input.tsx [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react/index.js [client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next-auth/react/index.js [client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$router$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/router.js [client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/axios/lib/axios.js [client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fc$2f$index$2e$mjs__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react-icons/fc/index.mjs [client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react-icons/fa/index.mjs [client] (ecmascript)");
 ;
 var _s = __turbopack_refresh__.signature();
 ;
 ;
+;
+;
+;
+;
+;
 function Auth() {
     _s();
+    const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$router$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const [email, setEmail] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [name, setName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [password, setPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])("");
@@ -628,10 +639,48 @@ function Auth() {
     const toggleVariant = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "Auth.useCallback[toggleVariant]": ()=>{
             setVariant({
-                "Auth.useCallback[toggleVariant]": (currentVariant)=>currentVariant == "login" ? "Resister" : "login"
+                "Auth.useCallback[toggleVariant]": (currentVariant)=>currentVariant == "login" ? "Register" : "login"
             }["Auth.useCallback[toggleVariant]"]);
         }
     }["Auth.useCallback[toggleVariant]"], []);
+    const login = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "Auth.useCallback[login]": async ()=>{
+            try {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["signIn"])("credentials", {
+                    email,
+                    password,
+                    redirect: false,
+                    callbackUrl: "/"
+                });
+                router.push("/");
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }["Auth.useCallback[login]"], [
+        email,
+        password,
+        router
+    ]);
+    const register = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "Auth.useCallback[register]": async ()=>{
+            try {
+                await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"].post("/api/register", {
+                    email,
+                    name,
+                    password
+                });
+                login();
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }["Auth.useCallback[register]"], [
+        email,
+        name,
+        password,
+        login
+    ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "relative netflix-bg h-full w-full bg-[url('/images/netbg.jpg')] bg-no-repeat bg-center bg-fixed bg-cover",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -647,16 +696,16 @@ function Auth() {
                         className: "bg-white"
                     }, void 0, false, {
                         fileName: "[project]/pages/auth.tsx",
-                        lineNumber: 21,
+                        lineNumber: 55,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/pages/auth.tsx",
-                    lineNumber: 20,
+                    lineNumber: 54,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex justify-center items-center",
+                    className: "flex justify-center ",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "bg-black  px-16 py-16 self self-center mt-2 lg:w-2/5 lg:max-md bg-opacity-70",
                         children: [
@@ -664,18 +713,18 @@ function Auth() {
                                 className: "text-white text-4xl mb-8 font-semibold",
                                 children: [
                                     " ",
-                                    variant == "login" ? "Sign in" : "Resister",
+                                    variant == "login" ? "Sign in" : "Register",
                                     " "
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/pages/auth.tsx",
-                                lineNumber: 31,
+                                lineNumber: 65,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex flex-col gap-4 ",
+                                className: "flex flex-col gap-4  ",
                                 children: [
-                                    variant == "Resister" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Input$2e$tsx__$5b$client$5d$__$28$ecmascript$29$__["default"], {
+                                    variant == "Register" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Input$2e$tsx__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                                         label: "username",
                                         onChange: (ev)=>{
                                             setName(ev.target.value);
@@ -685,7 +734,7 @@ function Auth() {
                                         value: name
                                     }, void 0, false, {
                                         fileName: "[project]/pages/auth.tsx",
-                                        lineNumber: 37,
+                                        lineNumber: 71,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Input$2e$tsx__$5b$client$5d$__$28$ecmascript$29$__["default"], {
@@ -698,7 +747,7 @@ function Auth() {
                                         value: email
                                     }, void 0, false, {
                                         fileName: "[project]/pages/auth.tsx",
-                                        lineNumber: 47,
+                                        lineNumber: 81,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Input$2e$tsx__$5b$client$5d$__$28$ecmascript$29$__["default"], {
@@ -711,21 +760,59 @@ function Auth() {
                                         value: password
                                     }, void 0, false, {
                                         fileName: "[project]/pages/auth.tsx",
-                                        lineNumber: 56,
+                                        lineNumber: 90,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/pages/auth.tsx",
-                                lineNumber: 35,
+                                lineNumber: 69,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: variant == "login" ? login : register,
                                 className: "bg-red-600 py-3 text-white rounded-md w-full mt-10 focus:bg-red-700 transition",
                                 children: variant == "login" ? "Login" : "Sign up"
                             }, void 0, false, {
                                 fileName: "[project]/pages/auth.tsx",
-                                lineNumber: 66,
+                                lineNumber: 100,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex flex-row items-center gap-4 mt-8 justify-center",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fc$2f$index$2e$mjs__$5b$client$5d$__$28$ecmascript$29$__["FcGoogle"], {
+                                            size: 30
+                                        }, void 0, false, {
+                                            fileName: "[project]/pages/auth.tsx",
+                                            lineNumber: 108,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/pages/auth.tsx",
+                                        lineNumber: 107,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$client$5d$__$28$ecmascript$29$__["FaGithub"], {
+                                            size: 30
+                                        }, void 0, false, {
+                                            fileName: "[project]/pages/auth.tsx",
+                                            lineNumber: 111,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/pages/auth.tsx",
+                                        lineNumber: 110,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/pages/auth.tsx",
+                                lineNumber: 106,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -738,39 +825,43 @@ function Auth() {
                                         children: variant == "login" ? "create and account" : "Login"
                                     }, void 0, false, {
                                         fileName: "[project]/pages/auth.tsx",
-                                        lineNumber: 73,
+                                        lineNumber: 118,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/pages/auth.tsx",
-                                lineNumber: 69,
+                                lineNumber: 114,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/pages/auth.tsx",
-                        lineNumber: 30,
+                        lineNumber: 64,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/pages/auth.tsx",
-                    lineNumber: 29,
+                    lineNumber: 63,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/pages/auth.tsx",
-            lineNumber: 19,
+            lineNumber: 53,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/pages/auth.tsx",
-        lineNumber: 18,
+        lineNumber: 52,
         columnNumber: 5
     }, this);
 }
-_s(Auth, "JSflLUomJaj046gv0czh5xTv8MA=");
+_s(Auth, "hY0dvO6qWc+5jabDiK3BygN+fG4=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$router$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useRouter"]
+    ];
+});
 _c = Auth;
 var _c;
 __turbopack_refresh__.register(_c, "Auth");
