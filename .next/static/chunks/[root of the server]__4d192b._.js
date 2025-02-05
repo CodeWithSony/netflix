@@ -688,21 +688,18 @@ function Auth() {
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
                     className: "",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                            src: "/images/logo.jpg",
-                            alt: "netflix",
-                            width: 100,
-                            height: 100,
-                            className: "bg-white"
-                        }, void 0, false, {
-                            fileName: "[project]/pages/auth.tsx",
-                            lineNumber: 57,
-                            columnNumber: 11
-                        }, this),
-                        "/>"
-                    ]
-                }, void 0, true, {
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                        src: "/images/logo.jpg",
+                        alt: "netflix",
+                        width: 100,
+                        height: 100,
+                        className: "bg-white"
+                    }, void 0, false, {
+                        fileName: "[project]/pages/auth.tsx",
+                        lineNumber: 57,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
                     fileName: "[project]/pages/auth.tsx",
                     lineNumber: 56,
                     columnNumber: 9
