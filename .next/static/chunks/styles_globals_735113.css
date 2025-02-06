@@ -348,10 +348,6 @@ img, video {
   margin-top: .5rem;
 }
 
-.mt-8 {
-  margin-top: 2rem;
-}
-
 .block {
   display: block;
 }
@@ -360,16 +356,8 @@ img, video {
   display: flex;
 }
 
-.h-10 {
-  height: 2.5rem;
-}
-
 .h-full {
   height: 100%;
-}
-
-.w-10 {
-  width: 2.5rem;
 }
 
 .w-full {
@@ -400,16 +388,8 @@ img, video {
   appearance: none;
 }
 
-.flex-row {
-  flex-direction: row;
-}
-
 .flex-col {
   flex-direction: column;
-}
-
-.items-center {
-  align-items: center;
 }
 
 .justify-center {
@@ -422,10 +402,6 @@ img, video {
 
 .self-center {
   align-self: center;
-}
-
-.rounded-full {
-  border-radius: 9999px;
 }
 
 .rounded-md {
@@ -528,10 +504,6 @@ img, video {
   color: rgb(161 161 170 / var(--tw-text-opacity, 1));
 }
 
-.underline {
-  text-decoration-line: underline;
-}
-
 .transition {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -557,8 +529,8 @@ html {
   height: 100%;
 }
 
-.hover\:opacity-80:hover {
-  opacity: .8;
+.hover\:underline:hover {
+  text-decoration-line: underline;
 }
 
 .focus\:bg-red-700:focus {

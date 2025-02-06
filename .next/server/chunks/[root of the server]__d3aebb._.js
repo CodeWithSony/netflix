@@ -8,39 +8,31 @@ const mod = __turbopack_external_require__("next/dist/compiled/next-server/pages
 
 module.exports = mod;
 }}),
-"[externals]/next-auth [external] (next-auth, cjs)": (function(__turbopack_context__) {
+"[externals]/bcryptjs [external] (bcryptjs, cjs)": (function(__turbopack_context__) {
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, m: module, e: exports, t: __turbopack_require_real__ } = __turbopack_context__;
 {
-const mod = __turbopack_external_require__("next-auth", () => require("next-auth"));
+const mod = __turbopack_external_require__("bcryptjs", () => require("bcryptjs"));
 
 module.exports = mod;
 }}),
-"[externals]/next-auth/providers/credentials [external] (next-auth/providers/credentials, cjs)": (function(__turbopack_context__) {
+"[externals]/jsonwebtoken [external] (jsonwebtoken, cjs)": (function(__turbopack_context__) {
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, m: module, e: exports, t: __turbopack_require_real__ } = __turbopack_context__;
 {
-const mod = __turbopack_external_require__("next-auth/providers/credentials", () => require("next-auth/providers/credentials"));
+const mod = __turbopack_external_require__("jsonwebtoken", () => require("jsonwebtoken"));
 
 module.exports = mod;
 }}),
-"[externals]/bcrypt [external] (bcrypt, cjs)": (function(__turbopack_context__) {
+"[externals]/mongoose [external] (mongoose, cjs)": (function(__turbopack_context__) {
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, m: module, e: exports, t: __turbopack_require_real__ } = __turbopack_context__;
 {
-const mod = __turbopack_external_require__("bcrypt", () => require("bcrypt"));
+const mod = __turbopack_external_require__("mongoose", () => require("mongoose"));
 
 module.exports = mod;
 }}),
-"[externals]/@prisma/client [external] (@prisma/client, cjs)": (function(__turbopack_context__) {
-
-var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, m: module, e: exports, t: __turbopack_require_real__ } = __turbopack_context__;
-{
-const mod = __turbopack_external_require__("@prisma/client", () => require("@prisma/client"));
-
-module.exports = mod;
-}}),
-"[project]/lib/prismadb.ts [api] (ecmascript)": ((__turbopack_context__) => {
+"[project]/lib/db.ts [api] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
@@ -48,31 +40,43 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
 __turbopack_esm__({
     "default": (()=>__TURBOPACK__default__export__)
 });
-var __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$29$__ = __turbopack_import__("[externals]/@prisma/client [external] (@prisma/client, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__ = __turbopack_import__("[externals]/mongoose [external] (mongoose, cjs)");
 ;
-const client = global.prismadb || new __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$29$__["PrismaClient"]();
-if ("TURBOPACK compile-time falsy", 0) {
-    "TURBOPACK unreachable";
+const MONGODB_URI = process.env.MONGO_URI;
+if (!MONGODB_URI) {
+    throw new Error("Please define the MONGO_URI environment variable in .env.local");
 }
-const __TURBOPACK__default__export__ = client;
+let cached = global.mongooseGlobal || {
+    conn: null,
+    promise: null
+};
+if (!global.mongooseGlobal) {
+    global.mongooseGlobal = cached;
+}
+async function dbConnect() {
+    if (cached.conn) {
+        return cached.conn;
+    }
+    if (!cached.promise) {
+        const opts = {
+            bufferCommands: false
+        };
+        cached.promise = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].connect(MONGODB_URI, opts).then((mongooseInstance)=>{
+            console.log("✅ MongoDB connected successfully");
+            return mongooseInstance.connection; // Extract the connection instance
+        });
+    }
+    try {
+        cached.conn = await cached.promise;
+    } catch (error) {
+        cached.promise = null;
+        throw error;
+    }
+    return cached.conn;
+}
+const __TURBOPACK__default__export__ = dbConnect;
 }}),
-"[externals]/next-auth/providers/github [external] (next-auth/providers/github, cjs)": (function(__turbopack_context__) {
-
-var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, m: module, e: exports, t: __turbopack_require_real__ } = __turbopack_context__;
-{
-const mod = __turbopack_external_require__("next-auth/providers/github", () => require("next-auth/providers/github"));
-
-module.exports = mod;
-}}),
-"[externals]/next-auth/providers/google [external] (next-auth/providers/google, cjs)": (function(__turbopack_context__) {
-
-var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, m: module, e: exports, t: __turbopack_require_real__ } = __turbopack_context__;
-{
-const mod = __turbopack_external_require__("next-auth/providers/google", () => require("next-auth/providers/google"));
-
-module.exports = mod;
-}}),
-"[project]/pages/api/auth/[...nextauth].ts [api] (ecmascript)": ((__turbopack_context__) => {
+"[project]/models/User.ts [api] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
@@ -80,73 +84,91 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
 __turbopack_esm__({
     "default": (()=>__TURBOPACK__default__export__)
 });
-var __TURBOPACK__imported__module__$5b$externals$5d2f$next$2d$auth__$5b$external$5d$__$28$next$2d$auth$2c$__cjs$29$__ = __turbopack_import__("[externals]/next-auth [external] (next-auth, cjs)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$next$2d$auth$2f$providers$2f$credentials__$5b$external$5d$__$28$next$2d$auth$2f$providers$2f$credentials$2c$__cjs$29$__ = __turbopack_import__("[externals]/next-auth/providers/credentials [external] (next-auth/providers/credentials, cjs)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$bcrypt__$5b$external$5d$__$28$bcrypt$2c$__cjs$29$__ = __turbopack_import__("[externals]/bcrypt [external] (bcrypt, cjs)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prismadb$2e$ts__$5b$api$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/lib/prismadb.ts [api] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$next$2d$auth$2f$providers$2f$github__$5b$external$5d$__$28$next$2d$auth$2f$providers$2f$github$2c$__cjs$29$__ = __turbopack_import__("[externals]/next-auth/providers/github [external] (next-auth/providers/github, cjs)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$next$2d$auth$2f$providers$2f$google__$5b$external$5d$__$28$next$2d$auth$2f$providers$2f$google$2c$__cjs$29$__ = __turbopack_import__("[externals]/next-auth/providers/google [external] (next-auth/providers/google, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__ = __turbopack_import__("[externals]/mongoose [external] (mongoose, cjs)");
 ;
-;
-;
-;
-;
-;
-const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$next$2d$auth__$5b$external$5d$__$28$next$2d$auth$2c$__cjs$29$__["default"])({
-    providers: [
-        (0, __TURBOPACK__imported__module__$5b$externals$5d2f$next$2d$auth$2f$providers$2f$github__$5b$external$5d$__$28$next$2d$auth$2f$providers$2f$github$2c$__cjs$29$__["default"])({
-            clientId: process.env.GITHUB_ID || '',
-            clientSecret: process.env.GITHUB_SECRET || ''
-        }),
-        (0, __TURBOPACK__imported__module__$5b$externals$5d2f$next$2d$auth$2f$providers$2f$google__$5b$external$5d$__$28$next$2d$auth$2f$providers$2f$google$2c$__cjs$29$__["default"])({
-            clientId: process.env.GOOGLE_CLIENT_ID || '',
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
-        }),
-        (0, __TURBOPACK__imported__module__$5b$externals$5d2f$next$2d$auth$2f$providers$2f$credentials__$5b$external$5d$__$28$next$2d$auth$2f$providers$2f$credentials$2c$__cjs$29$__["default"])({
-            id: 'credentials',
-            name: 'credentials',
-            credentials: {
-                email: {
-                    label: 'Email',
-                    type: 'text'
-                },
-                password: {
-                    label: 'password',
-                    type: 'password'
-                }
-            },
-            async authorize (credentials) {
-                if (!credentials?.email || !credentials?.password) {
-                    throw new Error('Email and password required');
-                }
-                const user = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prismadb$2e$ts__$5b$api$5d$__$28$ecmascript$29$__["default"].user.findUnique({
-                    where: {
-                        email: credentials.email
-                    }
-                });
-                if (!user || !user.hashedPassword) {
-                    throw new Error('Email does not exists');
-                }
-                const isCorrectPassword = await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$bcrypt__$5b$external$5d$__$28$bcrypt$2c$__cjs$29$__["compare"])(credentials.password, user.hashedPassword);
-                if (!isCorrectPassword) {
-                    throw new Error('Incorrect password');
-                }
-                return user;
-            }
-        })
-    ],
-    pages: {
-        signIn: '/auth'
+const UserSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["Schema"]({
+    name: {
+        type: String,
+        required: true
     },
-    debug: ("TURBOPACK compile-time value", "development") === 'development',
-    session: {
-        strategy: 'jwt'
+    email: {
+        type: String,
+        required: true,
+        unique: true
     },
-    jwt: {
-        secret: process.env.NEXTAUTH_SECRET
-    },
-    secret: process.env.NEXTAUTH_SECRET
+    password: {
+        type: String,
+        required: true
+    }
 });
+const User = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.User || __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("User", UserSchema);
+const __TURBOPACK__default__export__ = User;
+}}),
+"[project]/pages/api/auth/signup.ts [api] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
+{
+__turbopack_esm__({
+    "default": (()=>handler)
+});
+var __TURBOPACK__imported__module__$5b$externals$5d2f$bcryptjs__$5b$external$5d$__$28$bcryptjs$2c$__cjs$29$__ = __turbopack_import__("[externals]/bcryptjs [external] (bcryptjs, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$jsonwebtoken__$5b$external$5d$__$28$jsonwebtoken$2c$__cjs$29$__ = __turbopack_import__("[externals]/jsonwebtoken [external] (jsonwebtoken, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$ts__$5b$api$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/lib/db.ts [api] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$User$2e$ts__$5b$api$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/models/User.ts [api] (ecmascript)");
+;
+;
+;
+;
+const saltRounds = 10;
+async function handler(req, res) {
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$ts__$5b$api$5d$__$28$ecmascript$29$__["default"])();
+    if (req.method === "POST") {
+        try {
+            const { name, email, password } = req.body;
+            // Check if user already exists
+            const existingUser = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$User$2e$ts__$5b$api$5d$__$28$ecmascript$29$__["default"].findOne({
+                email
+            });
+            if (existingUser) {
+                return res.status(400).json({
+                    success: false,
+                    error: "User already exists"
+                });
+            }
+            // Hash password
+            const hashedPassword = await __TURBOPACK__imported__module__$5b$externals$5d2f$bcryptjs__$5b$external$5d$__$28$bcryptjs$2c$__cjs$29$__["default"].hash(password, saltRounds);
+            // Create new user
+            const newUser = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$User$2e$ts__$5b$api$5d$__$28$ecmascript$29$__["default"].create({
+                name,
+                email,
+                password: hashedPassword
+            });
+            // Create JWT token
+            const token = __TURBOPACK__imported__module__$5b$externals$5d2f$jsonwebtoken__$5b$external$5d$__$28$jsonwebtoken$2c$__cjs$29$__["default"].sign({
+                id: newUser._id,
+                email: newUser.email
+            }, process.env.JWT_SECRET, {
+                expiresIn: "1hr"
+            });
+            // Send response
+            res.status(201).json({
+                success: true,
+                token
+            });
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                error: error.message
+            });
+        }
+    } else {
+        res.status(405).json({
+            success: false,
+            message: "Method Not Allowed"
+        });
+    }
+}
 }}),
 "[project]/node_modules/next/dist/esm/server/route-modules/pages-api/module.compiled.js [api] (ecmascript)": (function(__turbopack_context__) {
 
@@ -224,7 +246,7 @@ function hoist(module, name) {
     return undefined;
 } //# sourceMappingURL=helpers.js.map
 }}),
-"[project]/node_modules/next/dist/esm/build/templates/pages-api.js { INNER_PAGE => \"[project]/pages/api/auth/[...nextauth].ts [api] (ecmascript)\" } [api] (ecmascript)": ((__turbopack_context__) => {
+"[project]/node_modules/next/dist/esm/build/templates/pages-api.js { INNER_PAGE => \"[project]/pages/api/auth/signup.ts [api] (ecmascript)\" } [api] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
@@ -238,26 +260,26 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$route$2d$kind$2e$js__$5b$api$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/esm/server/route-kind.js [api] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$build$2f$templates$2f$helpers$2e$js__$5b$api$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/esm/build/templates/helpers.js [api] (ecmascript)");
 // Import the userland code.
-var __TURBOPACK__imported__module__$5b$project$5d2f$pages$2f$api$2f$auth$2f5b2e2e2e$nextauth$5d2e$ts__$5b$api$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/pages/api/auth/[...nextauth].ts [api] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$pages$2f$api$2f$auth$2f$signup$2e$ts__$5b$api$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/pages/api/auth/signup.ts [api] (ecmascript)");
 ;
 ;
 ;
 ;
-const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$build$2f$templates$2f$helpers$2e$js__$5b$api$5d$__$28$ecmascript$29$__["hoist"])(__TURBOPACK__imported__module__$5b$project$5d2f$pages$2f$api$2f$auth$2f5b2e2e2e$nextauth$5d2e$ts__$5b$api$5d$__$28$ecmascript$29$__, 'default');
-const config = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$build$2f$templates$2f$helpers$2e$js__$5b$api$5d$__$28$ecmascript$29$__["hoist"])(__TURBOPACK__imported__module__$5b$project$5d2f$pages$2f$api$2f$auth$2f5b2e2e2e$nextauth$5d2e$ts__$5b$api$5d$__$28$ecmascript$29$__, 'config');
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$build$2f$templates$2f$helpers$2e$js__$5b$api$5d$__$28$ecmascript$29$__["hoist"])(__TURBOPACK__imported__module__$5b$project$5d2f$pages$2f$api$2f$auth$2f$signup$2e$ts__$5b$api$5d$__$28$ecmascript$29$__, 'default');
+const config = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$build$2f$templates$2f$helpers$2e$js__$5b$api$5d$__$28$ecmascript$29$__["hoist"])(__TURBOPACK__imported__module__$5b$project$5d2f$pages$2f$api$2f$auth$2f$signup$2e$ts__$5b$api$5d$__$28$ecmascript$29$__, 'config');
 const routeModule = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$route$2d$modules$2f$pages$2d$api$2f$module$2e$compiled$2e$js__$5b$api$5d$__$28$ecmascript$29$__["PagesAPIRouteModule"]({
     definition: {
         kind: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$route$2d$kind$2e$js__$5b$api$5d$__$28$ecmascript$29$__["RouteKind"].PAGES_API,
-        page: "/api/auth/[...nextauth]",
-        pathname: "/api/auth/[...nextauth]",
+        page: "/api/auth/signup",
+        pathname: "/api/auth/signup",
         // The following aren't used in production.
         bundlePath: '',
         filename: ''
     },
-    userland: __TURBOPACK__imported__module__$5b$project$5d2f$pages$2f$api$2f$auth$2f5b2e2e2e$nextauth$5d2e$ts__$5b$api$5d$__$28$ecmascript$29$__
+    userland: __TURBOPACK__imported__module__$5b$project$5d2f$pages$2f$api$2f$auth$2f$signup$2e$ts__$5b$api$5d$__$28$ecmascript$29$__
 }); //# sourceMappingURL=pages-api.js.map
 }}),
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__d70114._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__d3aebb._.js.map
