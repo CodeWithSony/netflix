@@ -1,17 +1,33 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import dataTableStyles from "../../styles/dataTableStyles";
-import { useEffect, useState } from "react";
-import { PencilIcon, XCircleIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import moment from "moment";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const router = useRouter();
+const AdminPage = () => {
+  const [movies, setMovies] = useState<RowData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const router = useRouter();
 
-const { id } = router.query; // Get the movie ID from the URL
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const res = await axios.get("/api/movies");
+        setMovies(res.data);
+      } catch (err) {
+        setError("Error fetching movies.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-const DeleteMovie = () => {
+    fetchMovies();
+  }, []);
+
   interface RowData {
     _id: string;
     name: string;
@@ -20,45 +36,25 @@ const DeleteMovie = () => {
     releaseDate: string;
     budget: number;
   }
-
-  const [movies, setMovies] = useState<RowData[]>([]);
-  const [isExpenceLoading, setisExpenceLoading] = useState(false);
-
-  const [loading, setLoading] = useState<boolean>(true);
-  const [data, setData] = useState([]);
-
-  const [error, setError] = useState<string>("");
-
-  useEffect(() => {
-    fetchMovies();
-  }, []);
-
-  useEffect(() => {
-    const fetchMovie = async () => {
-      if (!id) return;
-
-      try {
-        const response = await axios.get(`/api/movies?id=${id}`);
-        setMovies(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching movie:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchMovie();
-  }, [id]);
-
-  const DATE_FORMATS = {
-    DAY_MONTH_YEAR: "DD-MM-YYYY",
-  };
-
   const formatCurrancy = (value: number): string => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(value);
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete(`/api/movies?id=${id}`);
+      setMovies((prevMovies) => prevMovies.filter((movie) => movie._id !== id));
+    } catch (err) {
+      console.error("Error deleting movie:", err);
+      alert("Error deleting movie. Please try again.");
+    }
+  };
+
+  const handleEdit = (id: string) => {
+    router.push(`/edit/${id}`);
   };
 
   const columns = [
@@ -71,7 +67,7 @@ const DeleteMovie = () => {
     },
     {
       name: "Singer",
-      selector: (row: RowData) => row.singer.join(", "), //
+      selector: (row: RowData) => row.singer.join(", "),
       sortable: true,
       cell: (row: RowData) => (
         <span className="text-left">{row.singer.join(", ")}</span>
@@ -79,7 +75,7 @@ const DeleteMovie = () => {
     },
     {
       name: "Cast",
-      selector: (row: RowData) => row.cast.join(", "), //
+      selector: (row: RowData) => row.cast.join(", "),
       sortable: true,
       cell: (row: RowData) => (
         <span className="text-left">{row.cast.join(", ")}</span>
@@ -87,13 +83,12 @@ const DeleteMovie = () => {
     },
     {
       name: "Release Date",
-      selector: (row: RowData) =>
-        moment(row.releaseDate).format(DATE_FORMATS.DAY_MONTH_YEAR),
+      selector: (row: RowData) => moment(row.releaseDate).format("DD-MM-YYYY"),
       sortable: true,
       wrap: true,
       cell: (row: RowData) => (
         <span className="text-left">
-          {moment(row.releaseDate).format(DATE_FORMATS.DAY_MONTH_YEAR)}
+          {moment(row.releaseDate).format("DD-MM-YYYY")}
         </span>
       ),
     },
@@ -112,18 +107,18 @@ const DeleteMovie = () => {
       cell: (row: RowData) => (
         <div className="flex flex-col sm:flex-row gap-2 text-xs">
           <button
-            className="flex-1 sm:flex-auto min-w-[40px] px-2 py-1 bg-white text-gray-800 rounded-md border border-gray-300 
-                             hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900 
-                             transition-colors duration-200 flex items-center justify-center"
+            className="flex-1 sm:flex-auto min-w-[40px] px-2 py-1 bg-white text-gray-800 rounded-md border border-gray-300
+                                 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900
+                                 transition-colors duration-200 flex items-center justify-center"
             onClick={() => handleEdit(row._id)}
           >
             <PencilIcon className="mr-1 text-green-500 h-7 w-8" />
           </button>
 
           <button
-            className="flex-1 sm:flex-auto min-w-[40px] px-2 py-1 bg-white text-gray-800 rounded-md border border-gray-300 
-                             hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900 
-                             transition-colors duration-200 flex items-center justify-center"
+            className="flex-1 sm:flex-auto min-w-[40px] px-2 py-1 bg-white text-gray-800 rounded-md border border-gray-300
+                                 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900
+                                 transition-colors duration-200 flex items-center justify-center"
             onClick={() => handleDelete(row._id)}
           >
             <TrashIcon className="mr-1 text-red-500 h-8 w-8" />
@@ -132,45 +127,6 @@ const DeleteMovie = () => {
       ),
     },
   ];
-
-  const handleDelete = async (id: string) => {
-    try {
-      const response = await axios.delete(`/api/movies?id=${id}`);
-
-      if (response.status === 200) {
-        setMovies(movies.filter((movie) => movie._id !== id));
-      } else {
-        alert("Failed to delete movie.");
-      }
-    } catch (error) {
-      console.error("Error deleting movie:", error);
-      alert("Error deleting movie. Please try again.");
-    }
-  };
-
-  const handleEdit = (id: string) => {
-    console.log("edting..", id);
-    // console.log("Router:", router);
-
-    router.push(`/edit/${id}`);
-    // console.log("Router:", router);
-  };
-
-  const fetchMovies = async () => {
-    try {
-      const res = await fetch("/api/movies");
-      if (res.ok) {
-        const data = await res.json();
-        setMovies(data);
-      } else {
-        setError("Failed to load movies.");
-      }
-    } catch (error) {
-      setError("Error fetching movies.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -181,23 +137,18 @@ const DeleteMovie = () => {
   }
 
   return (
-    <div className="mx-3 p-4 bg-white rounded-lg    ">
-      <h1 className="text-xl font-semibold text-blue-900">Expenses</h1>
+    <div className="mx-3 p-4 bg-white rounded-lg">
+      <h1 className="text-xl font-semibold text-blue-900">Manage Movies</h1>
       <DataTable
         columns={columns}
         data={movies}
         pagination
-        paginationServer
         responsive
-        customStyles={dataTableStyles}
-        progressPending={isExpenceLoading}
-        // paginationTotalRows={totalRows}
-        // onChangePage={handlePageChange}
-        // onChangeRowsPerPage={handlePerRowsChange}
+        progressPending={loading}
         paginationRowsPerPageOptions={[10, 20, 30, 40, 50]}
       />
     </div>
   );
 };
 
-export default DeleteMovie;
+export default AdminPage;

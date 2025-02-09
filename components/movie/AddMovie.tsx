@@ -12,8 +12,12 @@ export default function AdminPage() {
   });
   const router = useRouter();
 
-  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [videoUrl, setVideoUrl] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,6 +30,7 @@ export default function AdminPage() {
     setMessage("");
 
     try {
+      // Create the movie
       const res = await fetch("/api/movies", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -39,8 +44,19 @@ export default function AdminPage() {
       });
 
       if (res.ok) {
+        const data = await res.json();
+        const movieId: string = data._id; // Ensure _id is extracted correctly
+        console.log(`Movie ID: ${movieId}`);
+        // Ensure movieId is not empty
+        if (!movieId || typeof movieId !== "string") {
+          setError("Invalid movie ID format.");
+          return;
+        }
+
+        // Now call handleUpload to upload the video with movieId
+        handleUpload(movieId); // Pass movieId to the video upload function
         setMessage("Movie added successfully!");
-        router.push("/");
+        // router.push("/"); // Optionally navigate to another page
       } else {
         setMessage("Failed to add movie.");
       }
@@ -51,10 +67,55 @@ export default function AdminPage() {
     }
   };
 
+  const handleUpload = async (movieId: string) => {
+    if (!videoFile) {
+      setError("Please select a video file.");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    // Check if the movieId is valid
+    if (!movieId || typeof movieId !== "string") {
+      setError("Invalid movie ID.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("video", videoFile);
+    formData.append("movieId", movieId); // Ensure movieId is a valid string
+
+    try {
+      const response = await fetch("/api/upload-video", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setVideoUrl(data.videoUrl);
+      } else {
+        setError(data.error || "Failed to upload video");
+      }
+    } catch (error) {
+      setError("Error uploading video");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setVideoFile(file);
+      setError(""); // Clear any previous error
+    }
+  };
+
   return (
     <div className="h-screen w-full bg-black justify-center items-center flex">
       <br />
-      <div className="p-4 max-w-lg  bg-white ">
+      <div className="p-4 max-w-lg bg-white ">
         <h1 className="text-2xl font-bold mb-4">Add Movie</h1>
         <form onSubmit={handleSubmit} className="space-y-3">
           <input
@@ -98,9 +159,36 @@ export default function AdminPage() {
             className="border p-2 w-full"
             required
           />
+
+          {/* Video Upload Section */}
+          <input
+            type="file"
+            accept="video/*"
+            onChange={handleFileChange}
+            disabled={loading}
+          />
+          {error && <div className="error-message">{error}</div>}
+          <button
+            type="button"
+            onClick={() => videoFile && handleUpload(form.name)} // Remove this
+            disabled={loading}
+          >
+            {loading ? "Uploading..." : "Upload Video"}
+          </button>
+
+          {videoUrl && (
+            <div className="video-preview">
+              <h3>Uploaded Video:</h3>
+              <video controls>
+                <source src={videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          )}
+
           <button
             type="submit"
-            className="bg-red-600 py-3 hover:bg-green-700 text-white focus:bg-grenn-700  p-2 w-full"
+            className="bg-red-600 py-3 hover:bg-green-700 text-white focus:bg-grenn-700 p-2 w-full"
             disabled={loading}
           >
             {loading ? "Saving..." : "Save Movie"}

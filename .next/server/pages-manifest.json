@@ -2,13 +2,10 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/api/movies": "pages/api/movies.js",
-  "/moviedata": "pages/moviedata.js",
-  "/_error": "pages/_error.js",
   "/admin/[tab]": "pages/admin/[tab].js",
-  "/auth": "pages/auth.js",
-  "/edit/[id]": "pages/edit/[id].js",
-  "/api/auth/login": "pages/api/auth/login.js",
   "/api/auth/session": "pages/api/auth/session.js",
-  "/api/auth/_log": "pages/api/auth/_log.js"
+  "/api/auth/_log": "pages/api/auth/_log.js",
+  "/api/movies": "pages/api/movies.js",
+  "/auth": "pages/auth.js",
+  "/api/upload-video": "pages/api/upload-video.js"
 }

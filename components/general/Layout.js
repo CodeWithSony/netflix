@@ -2,25 +2,13 @@ import { Fragment, useState, useEffect } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
-import {
-  MagnifyingGlassIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
-} from "@heroicons/react/20/solid";
+import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/20/solid";
 
 import {
   ClipboardDocumentListIcon,
-  HomeIcon,
+  TrashIcon,
   BellIcon,
   XMarkIcon,
-  IdentificationIcon,
-  ChartBarIcon,
-  UserIcon,
-  CogIcon,
-  AdjustmentsHorizontalIcon,
-  DocumentTextIcon,
 } from "@heroicons/react/24/outline";
 // import { jwtDecode } from "jwt-decode";
 
@@ -63,18 +51,18 @@ export default function Layout({ children }) {
 
   const router = useRouter();
   const [tabs, SetTabss] = useState([
-    // {
-    //   name: "Setups",
-    //   code: "setup",
-    //   href: "/setup/setups",
-    //   icon: Cog6ToothIcon,
-    //   current: false,
-    // },
     {
-      name: "Movie Details",
+      name: "Add Movie",
       code: "add-movie",
       href: "/admin/add-movie",
       icon: ClipboardDocumentListIcon,
+      current: false,
+    },
+    {
+      name: "Delete Movie",
+      code: "delete-movie",
+      href: "/admin/delete-movie",
+      icon: TrashIcon,
       current: false,
     },
   ]);
@@ -112,7 +100,6 @@ export default function Layout({ children }) {
                 <span className="text-white capitalize">
                   {process.env.PROJECT_NAME}{" "}
                 </span>{" "}
-                {/* <span className="text-blue-300">Shakthi</span>{" "} */}
                 <span className="text-blue-300"></span>
               </h2>
             </div>
@@ -158,7 +145,7 @@ export default function Layout({ children }) {
             </div>
           </div>
 
-          <Transition.Root show={mobileMenuOpen} as={Fragment}>
+          {/* <Transition.Root show={mobileMenuOpen} as={Fragment}>
             <Dialog
               as="div"
               className="relative z-40 md:hidden"
@@ -291,7 +278,7 @@ export default function Layout({ children }) {
                 </Transition.Child>
               </div>
             </Dialog>
-          </Transition.Root>
+          </Transition.Root> */}
         </header>
 
         {/* Bottom section */}

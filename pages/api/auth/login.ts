@@ -1,14 +1,8 @@
-import dbConnect from "../../../lib/db";
-import User from "../../../models/User";
+import type { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { NextApiRequest, NextApiResponse } from "next";
-
-const JWT_SECRET = process.env.JWT_SECRET;
-
-if (!JWT_SECRET) {
-  throw new Error("JWT_SECRET environment variable is not defined.");
-}
+import dbConnect from "@/lib/db";
+import User from "@/models/User";
 
 export default async function handler(
   req: NextApiRequest,
@@ -39,19 +33,17 @@ export default async function handler(
     if (!isPasswordCorrect) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
+    const JWT_SECRET = process.env.JWT_SECRET;
 
-    // Generate JWT token
-    const jwtSecret = process.env.JWT_SECRET;
-
-    if (!jwtSecret) {
-      return res.status(500).json({
-        message: "JWT secret is not defined in environment variables.",
-      });
+    if (!JWT_SECRET) {
+      throw new Error("JWT_SECRET environment variable is not defined.");
     }
 
-    const token = jwt.sign({ userId: user._id }, jwtSecret, {
+    // Generate JWT token
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
       expiresIn: "1h",
     });
+
     return res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     console.error(error);

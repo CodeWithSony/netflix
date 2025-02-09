@@ -24,8 +24,11 @@ function AdminPage() {
         budget: ""
     });
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$router$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
-    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])("");
+    const [videoFile, setVideoFile] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(null);
+    const [videoUrl, setVideoUrl] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])("");
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
+    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])("");
     const handleChange = (e)=>{
         setForm({
             ...form,
@@ -37,6 +40,7 @@ function AdminPage() {
         setLoading(true);
         setMessage("");
         try {
+            // Create the movie
             const res = await fetch("/api/movies", {
                 method: "POST",
                 headers: {
@@ -51,8 +55,18 @@ function AdminPage() {
                 })
             });
             if (res.ok) {
+                const data = await res.json();
+                const movieId = data._id; // Ensure _id is extracted correctly
+                console.log(`Movie ID: ${movieId}`);
+                // Ensure movieId is not empty
+                if (!movieId || typeof movieId !== "string") {
+                    setError("Invalid movie ID format.");
+                    return;
+                }
+                // Now call handleUpload to upload the video with movieId
+                handleUpload(movieId); // Pass movieId to the video upload function
                 setMessage("Movie added successfully!");
-                router.push("/");
+            // router.push("/"); // Optionally navigate to another page
             } else {
                 setMessage("Failed to add movie.");
             }
@@ -62,23 +76,62 @@ function AdminPage() {
             setLoading(false);
         }
     };
+    const handleUpload = async (movieId)=>{
+        if (!videoFile) {
+            setError("Please select a video file.");
+            return;
+        }
+        setLoading(true);
+        setError("");
+        // Check if the movieId is valid
+        if (!movieId || typeof movieId !== "string") {
+            setError("Invalid movie ID.");
+            return;
+        }
+        const formData = new FormData();
+        formData.append("video", videoFile);
+        formData.append("movieId", movieId); // Ensure movieId is a valid string
+        try {
+            const response = await fetch("/api/upload-video", {
+                method: "POST",
+                body: formData
+            });
+            const data = await response.json();
+            if (response.ok) {
+                setVideoUrl(data.videoUrl);
+            } else {
+                setError(data.error || "Failed to upload video");
+            }
+        } catch (error) {
+            setError("Error uploading video");
+        } finally{
+            setLoading(false);
+        }
+    };
+    const handleFileChange = (event)=>{
+        const file = event.target.files?.[0];
+        if (file) {
+            setVideoFile(file);
+            setError(""); // Clear any previous error
+        }
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
         className: "h-screen w-full bg-black justify-center items-center flex",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("br", {}, void 0, false, {
                 fileName: "[project]/components/movie/AddMovie.tsx",
-                lineNumber: 56,
+                lineNumber: 117,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                className: "p-4 max-w-lg  bg-white ",
+                className: "p-4 max-w-lg bg-white ",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
                         className: "text-2xl font-bold mb-4",
                         children: "Add Movie"
                     }, void 0, false, {
                         fileName: "[project]/components/movie/AddMovie.tsx",
-                        lineNumber: 58,
+                        lineNumber: 119,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("form", {
@@ -94,7 +147,7 @@ function AdminPage() {
                                 required: true
                             }, void 0, false, {
                                 fileName: "[project]/components/movie/AddMovie.tsx",
-                                lineNumber: 60,
+                                lineNumber: 121,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
@@ -106,7 +159,7 @@ function AdminPage() {
                                 required: true
                             }, void 0, false, {
                                 fileName: "[project]/components/movie/AddMovie.tsx",
-                                lineNumber: 68,
+                                lineNumber: 129,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
@@ -118,7 +171,7 @@ function AdminPage() {
                                 required: true
                             }, void 0, false, {
                                 fileName: "[project]/components/movie/AddMovie.tsx",
-                                lineNumber: 76,
+                                lineNumber: 137,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
@@ -130,7 +183,7 @@ function AdminPage() {
                                 required: true
                             }, void 0, false, {
                                 fileName: "[project]/components/movie/AddMovie.tsx",
-                                lineNumber: 84,
+                                lineNumber: 145,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
@@ -143,23 +196,85 @@ function AdminPage() {
                                 required: true
                             }, void 0, false, {
                                 fileName: "[project]/components/movie/AddMovie.tsx",
-                                lineNumber: 92,
+                                lineNumber: 153,
                                 columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                                type: "file",
+                                accept: "video/*",
+                                onChange: handleFileChange,
+                                disabled: loading
+                            }, void 0, false, {
+                                fileName: "[project]/components/movie/AddMovie.tsx",
+                                lineNumber: 164,
+                                columnNumber: 11
+                            }, this),
+                            error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                className: "error-message",
+                                children: error
+                            }, void 0, false, {
+                                fileName: "[project]/components/movie/AddMovie.tsx",
+                                lineNumber: 170,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                type: "button",
+                                onClick: ()=>videoFile && handleUpload(form.name),
+                                disabled: loading,
+                                children: loading ? "Uploading..." : "Upload Video"
+                            }, void 0, false, {
+                                fileName: "[project]/components/movie/AddMovie.tsx",
+                                lineNumber: 171,
+                                columnNumber: 11
+                            }, this),
+                            videoUrl && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                className: "video-preview",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
+                                        children: "Uploaded Video:"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/movie/AddMovie.tsx",
+                                        lineNumber: 181,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("video", {
+                                        controls: true,
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("source", {
+                                                src: videoUrl,
+                                                type: "video/mp4"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/movie/AddMovie.tsx",
+                                                lineNumber: 183,
+                                                columnNumber: 17
+                                            }, this),
+                                            "Your browser does not support the video tag."
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/movie/AddMovie.tsx",
+                                        lineNumber: 182,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/movie/AddMovie.tsx",
+                                lineNumber: 180,
+                                columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
                                 type: "submit",
-                                className: "bg-red-600 py-3 hover:bg-green-700 text-white focus:bg-grenn-700  p-2 w-full",
+                                className: "bg-red-600 py-3 hover:bg-green-700 text-white focus:bg-grenn-700 p-2 w-full",
                                 disabled: loading,
                                 children: loading ? "Saving..." : "Save Movie"
                             }, void 0, false, {
                                 fileName: "[project]/components/movie/AddMovie.tsx",
-                                lineNumber: 101,
+                                lineNumber: 189,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/movie/AddMovie.tsx",
-                        lineNumber: 59,
+                        lineNumber: 120,
                         columnNumber: 9
                     }, this),
                     message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -167,19 +282,19 @@ function AdminPage() {
                         children: message
                     }, void 0, false, {
                         fileName: "[project]/components/movie/AddMovie.tsx",
-                        lineNumber: 110,
+                        lineNumber: 198,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/movie/AddMovie.tsx",
-                lineNumber: 57,
+                lineNumber: 118,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/movie/AddMovie.tsx",
-        lineNumber: 55,
+        lineNumber: 116,
         columnNumber: 5
     }, this);
 }
