@@ -5,6 +5,6 @@ runtime.loadChunk("server/chunks/ssr/node_modules_react-icons_fc_index_mjs_f61d4
 runtime.loadChunk("server/chunks/ssr/node_modules_react-icons_fa_index_mjs_275a22._.js");
 runtime.loadChunk("server/chunks/ssr/node_modules_react-icons_lib_6322da._.js");
 runtime.loadChunk("server/chunks/ssr/node_modules_@swc_helpers_cjs_ac5ba3._.js");
-runtime.loadChunk("server/chunks/ssr/[root of the server]__aec565._.js");
+runtime.loadChunk("server/chunks/ssr/[root of the server]__a248a2._.js");
 runtime.loadChunk("server/chunks/ssr/styles_globals_ff5908.css");
 module.exports = runtime.getOrInstantiateRuntimeModule("[project]/node_modules/next/dist/esm/build/templates/pages.js { INNER_PAGE => \"[project]/pages/auth.tsx [ssr] (ecmascript)\", INNER_DOCUMENT => \"[project]/node_modules/next/document.js [ssr] (ecmascript)\", INNER_APP => \"[project]/pages/_app.tsx [ssr] (ecmascript)\" } [ssr] (ecmascript)", CHUNK_PUBLIC_PATH).exports;

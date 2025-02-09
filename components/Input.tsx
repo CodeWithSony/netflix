@@ -1,25 +1,29 @@
-import React, { useEffect } from 'react'
+// Input.tsx (or within the same file)
+import React from "react";
+
 interface InputProps {
-  id: string;
-  onChange: any;
-  value:string;
   label: string;
+  value: string | number;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  id: string;
   type: string;
 }
-const Input: React.FC <InputProps> = ({id, onChange,value, label, type}) => {
+
+const Input: React.FC<InputProps> = ({ label, value, onChange, id, type }) => {
   return (
-    <>
-    <div className="relative ">
-  <input id={id} onChange={onChange} type={type} value={value}  className='block rounded-md px-6 pt-6 pb-1 w-full  text-white bg-neutral-700 appearance-none focus:outline-none focus:ring-0 peer ' placeholder='' />
-  <label 
-  className='absolute text-md text-zinc-400 duration-150 transform -translate-y3 scale-75 top-4 z-10 origin-[0] left-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-3 ' 
-   htmlFor={id} > 
-{label}
-  </label>
-  </div>
-  </>
-  )
-}
+    <div className="flex flex-col">
+      <label htmlFor={id} className="text-white font-semibold mb-1">
+        {label}
+      </label>
+      <input
+        id={id}
+        type={type}
+        value={value}
+        onChange={onChange}
+        className="px-4 py-2 bg-gray-800 text-white rounded-md"
+      />
+    </div>
+  );
+};
 
-
-export default Input
+export default Input;

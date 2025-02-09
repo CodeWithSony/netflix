@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 63, "column": 0}, "map": {"version":3,"sources":["file://E%3A/practice/netflix/pages/_app.tsx"],"sourcesContent":["import \"../styles/globals.css\";\r\nimport { SessionProvider } from \"next-auth/react\";\r\nimport type { AppProps } from \"next/app\";\r\nimport type { Session } from \"next-auth\";\r\n\r\ninterface CustomAppProps extends AppProps {\r\n  pageProps: {\r\n    session?: Session;\r\n  };\r\n}\r\n\r\nfunction App({ Component, pageProps }: CustomAppProps) {\r\n  return (\r\n    <SessionProvider session={pageProps.session}>\r\n      <Component {...pageProps} />\r\n    </SessionProvider>\r\n  );\r\n}\r\n\r\nexport default App;\r\n"],"names":[],"mappings":";;;;AACA;;;;AAUA,SAAS,IAAI,EAAE,SAAS,EAAE,SAAS,EAAkB;IACnD,qBACE,qKAAC,mIAAA,CAAA,kBAAe;QAAC,SAAS,UAAU,OAAO;kBACzC,cAAA,qKAAC;YAAW,GAAG,SAAS;;;;;;;;;;;AAG9B;uCAEe"}},
+    {"offset": {"line": 88, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 93, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
+    {"offset": {"line": 93, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

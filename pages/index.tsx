@@ -1,5 +1,14 @@
-// 12: 8  image is not coming
+import React from "react";
+import Link from "next/link";
+import MovieData from "../components/data/MovieData";
+const index = () => {
+  return (
+    <div className="flex w-[100%] gap-x-5 justity-between">
+      <div className="bg-gray-400 w-full">
+        <MovieData />
+      </div>
+    </div>
+  );
+};
 
-export default function Home() {
-  return <h1>Netflix Clone</h1>;
-}
+export default index;

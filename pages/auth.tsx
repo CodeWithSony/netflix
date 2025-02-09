@@ -23,11 +23,9 @@ export default function Auth() {
 
   const login = useCallback(async () => {
     try {
-      await signIn("credentials", {
+      await axios.post("/api/auth/login", {
         email,
         password,
-        redirect: false,
-        callbackUrl: "/",
       });
       router.push("/");
     } catch (error) {
@@ -37,7 +35,7 @@ export default function Auth() {
 
   const register = useCallback(async () => {
     try {
-      await axios.post("/api/register", {
+      await axios.post("/api/auth/signup", {
         email,
         name,
         password,
