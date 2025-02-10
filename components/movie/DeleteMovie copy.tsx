@@ -7,26 +7,10 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-interface Video {
-  _id: string;
-  videoUrl: string;
-  movieId: string;
-}
-
-interface RowData {
-  _id: string;
-  name: string;
-  singer: string[];
-  cast: string[];
-  releaseDate: string;
-  budget: number;
-}
 const AdminPage = () => {
   const [movies, setMovies] = useState<RowData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [videos, setVideos] = useState<Video[]>([]);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -42,26 +26,16 @@ const AdminPage = () => {
     };
 
     fetchMovies();
-    fetchVideos();
   }, []);
 
-  const fetchVideos = async () => {
-    try {
-      const response = await fetch("/api/get-videos");
-      const data = await response.json();
-
-      if (response.ok) {
-        setVideos(data.videos);
-      } else {
-        setError(data.error || "Failed to fetch videos");
-      }
-    } catch (err) {
-      setError("Error fetching videos");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  interface RowData {
+    _id: string;
+    name: string;
+    singer: string[];
+    cast: string[];
+    releaseDate: string;
+    budget: number;
+  }
   const formatCurrancy = (value: number): string => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",

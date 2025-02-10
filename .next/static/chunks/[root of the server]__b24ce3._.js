@@ -569,11 +569,29 @@ function HomePage() {
     const [movies, setMovies] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])(true);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [videos, setVideos] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])([]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "HomePage.useEffect": ()=>{
             fetchMovies();
+            fetchVideos();
         }
     }["HomePage.useEffect"], []);
+    const fetchVideos = async ()=>{
+        try {
+            const response = await fetch("/api/get-videos");
+            const data = await response.json();
+            if (response.ok) {
+                setVideos(data.videos);
+            } else {
+                setError(data.error || "Failed to fetch videos");
+            }
+        } catch (err) {
+            setError("Error fetching videos");
+        } finally{
+            setLoading(false);
+        }
+    };
+    // with movei detail will also come
     const fetchMovies = async ()=>{
         try {
             const res = await fetch("/api/movies");
@@ -594,7 +612,7 @@ function HomePage() {
             children: "Loading..."
         }, void 0, false, {
             fileName: "[project]/components/data/MovieData.tsx",
-            lineNumber: 38,
+            lineNumber: 65,
             columnNumber: 12
         }, this);
     }
@@ -603,120 +621,160 @@ function HomePage() {
             children: error
         }, void 0, false, {
             fileName: "[project]/components/data/MovieData.tsx",
-            lineNumber: 42,
+            lineNumber: 69,
             columnNumber: 12
         }, this);
     }
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "p-4",
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                className: "text-2xl font-bold mb-4",
+                className: "text-2xl font-bold mb-4 mx-[40%]",
                 children: "Movie List"
             }, void 0, false, {
                 fileName: "[project]/components/data/MovieData.tsx",
-                lineNumber: 47,
+                lineNumber: 74,
                 columnNumber: 7
             }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
-                className: "space-y-3",
-                children: movies.map((movie)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                        className: "border p-4",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "text-xl font-semibold",
-                                children: movie.name
-                            }, void 0, false, {
-                                fileName: "[project]/components/data/MovieData.tsx",
-                                lineNumber: 51,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "p-4 flex w-full",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                        className: "space-y-3 w-[75%]",
+                        children: movies.map((movie)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                className: "border h-[230px] p-4 flex justify-between",
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                        children: "Cast:"
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                        className: "text-xl font-semibold",
+                                        children: [
+                                            "Movie Name: ",
+                                            movie.name
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/components/data/MovieData.tsx",
-                                        lineNumber: 53,
+                                        lineNumber: 83,
                                         columnNumber: 15
                                     }, this),
-                                    " ",
-                                    movie.cast.join(", ")
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/data/MovieData.tsx",
-                                lineNumber: 52,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                        children: "Singer:"
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                                children: "Cast:"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/data/MovieData.tsx",
+                                                lineNumber: 87,
+                                                columnNumber: 17
+                                            }, this),
+                                            " ",
+                                            movie.cast.join(", ")
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/components/data/MovieData.tsx",
-                                        lineNumber: 56,
+                                        lineNumber: 86,
                                         columnNumber: 15
                                     }, this),
-                                    " ",
-                                    movie.singer || "N/A"
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/data/MovieData.tsx",
-                                lineNumber: 55,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                        children: "Release Date:"
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                                children: "Singer:"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/data/MovieData.tsx",
+                                                lineNumber: 90,
+                                                columnNumber: 17
+                                            }, this),
+                                            " ",
+                                            movie.singer || "N/A"
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/components/data/MovieData.tsx",
-                                        lineNumber: 59,
+                                        lineNumber: 89,
                                         columnNumber: 15
                                     }, this),
-                                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$moment$2f$moment$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"])(movie.releaseDate).format("MMMM DD, YYYY")
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/data/MovieData.tsx",
-                                lineNumber: 58,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                        children: "Budget:"
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                                children: "Release Date:"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/data/MovieData.tsx",
+                                                lineNumber: 93,
+                                                columnNumber: 17
+                                            }, this),
+                                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$moment$2f$moment$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"])(movie.releaseDate).format("MMMM DD, YYYY")
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/components/data/MovieData.tsx",
-                                        lineNumber: 63,
+                                        lineNumber: 92,
                                         columnNumber: 15
                                     }, this),
-                                    " ",
-                                    movie.budget
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                                children: "Budget:"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/data/MovieData.tsx",
+                                                lineNumber: 97,
+                                                columnNumber: 17
+                                            }, this),
+                                            " ",
+                                            movie.budget
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/data/MovieData.tsx",
+                                        lineNumber: 96,
+                                        columnNumber: 15
+                                    }, this)
                                 ]
-                            }, void 0, true, {
+                            }, movie._id, true, {
                                 fileName: "[project]/components/data/MovieData.tsx",
-                                lineNumber: 62,
+                                lineNumber: 79,
                                 columnNumber: 13
-                            }, this)
-                        ]
-                    }, movie._id, true, {
+                            }, this))
+                    }, void 0, false, {
                         fileName: "[project]/components/data/MovieData.tsx",
-                        lineNumber: 50,
-                        columnNumber: 11
-                    }, this))
-            }, void 0, false, {
+                        lineNumber: 77,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                        className: "flex flex-col gap-y-2 w-[25%]",
+                        children: videos.map((video)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "border p-4",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("video", {
+                                    controls: true,
+                                    className: "w-[95%] h-[200px]",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("source", {
+                                            src: video.videoUrl,
+                                            type: "video/mp4"
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/data/MovieData.tsx",
+                                            lineNumber: 106,
+                                            columnNumber: 17
+                                        }, this),
+                                        "Your browser does not support the video tag."
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/data/MovieData.tsx",
+                                    lineNumber: 105,
+                                    columnNumber: 15
+                                }, this)
+                            }, video._id, false, {
+                                fileName: "[project]/components/data/MovieData.tsx",
+                                lineNumber: 104,
+                                columnNumber: 13
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "[project]/components/data/MovieData.tsx",
+                        lineNumber: 102,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/data/MovieData.tsx",
-                lineNumber: 48,
+                lineNumber: 76,
                 columnNumber: 7
             }, this)
         ]
-    }, void 0, true, {
-        fileName: "[project]/components/data/MovieData.tsx",
-        lineNumber: 46,
-        columnNumber: 5
-    }, this);
+    }, void 0, true);
 }
-_s(HomePage, "hh0Zm++SFtCRsURt136ZBmr6u8Y=");
+_s(HomePage, "EDovbJH7kvRsEqR7zdk8mTo+x90=");
 _c = HomePage;
 var _c;
 __turbopack_refresh__.register(_c, "HomePage");

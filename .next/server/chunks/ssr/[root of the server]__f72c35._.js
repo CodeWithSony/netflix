@@ -58,6 +58,7 @@ const AdminPage = ()=>{
     const [movies, setMovies] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])([]);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(true);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])("");
+    const [videos, setVideos] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])([]);
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$router$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
     (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useEffect"])(()=>{
         const fetchMovies = async ()=>{
@@ -71,7 +72,23 @@ const AdminPage = ()=>{
             }
         };
         fetchMovies();
+        fetchVideos();
     }, []);
+    const fetchVideos = async ()=>{
+        try {
+            const response = await fetch("/api/get-videos");
+            const data = await response.json();
+            if (response.ok) {
+                setVideos(data.videos);
+            } else {
+                setError(data.error || "Failed to fetch videos");
+            }
+        } catch (err) {
+            setError("Error fetching videos");
+        } finally{
+            setLoading(false);
+        }
+    };
     const formatCurrancy = (value)=>{
         return new Intl.NumberFormat("en-US", {
             style: "currency",
@@ -101,7 +118,7 @@ const AdminPage = ()=>{
                     children: row.name
                 }, void 0, false, {
                     fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 66,
+                    lineNumber: 92,
                     columnNumber: 31
                 }, this)
         },
@@ -114,7 +131,7 @@ const AdminPage = ()=>{
                     children: row.singer.join(", ")
                 }, void 0, false, {
                     fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 73,
+                    lineNumber: 99,
                     columnNumber: 9
                 }, this)
         },
@@ -127,7 +144,7 @@ const AdminPage = ()=>{
                     children: row.cast.join(", ")
                 }, void 0, false, {
                     fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 81,
+                    lineNumber: 107,
                     columnNumber: 9
                 }, this)
         },
@@ -141,7 +158,7 @@ const AdminPage = ()=>{
                     children: (0, __TURBOPACK__imported__module__$5b$externals$5d2f$moment__$5b$external$5d$__$28$moment$2c$__cjs$29$__["default"])(row.releaseDate).format("DD-MM-YYYY")
                 }, void 0, false, {
                     fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 90,
+                    lineNumber: 116,
                     columnNumber: 9
                 }, this)
         },
@@ -155,7 +172,7 @@ const AdminPage = ()=>{
                     children: formatCurrancy(row.budget)
                 }, void 0, false, {
                     fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 101,
+                    lineNumber: 127,
                     columnNumber: 9
                 }, this)
         },
@@ -172,12 +189,12 @@ const AdminPage = ()=>{
                                 className: "mr-1 text-green-500 h-7 w-8"
                             }, void 0, false, {
                                 fileName: "[project]/components/movie/DeleteMovie.tsx",
-                                lineNumber: 115,
+                                lineNumber: 141,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/movie/DeleteMovie.tsx",
-                            lineNumber: 109,
+                            lineNumber: 135,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -187,18 +204,18 @@ const AdminPage = ()=>{
                                 className: "mr-1 text-red-500 h-8 w-8"
                             }, void 0, false, {
                                 fileName: "[project]/components/movie/DeleteMovie.tsx",
-                                lineNumber: 124,
+                                lineNumber: 150,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/movie/DeleteMovie.tsx",
-                            lineNumber: 118,
+                            lineNumber: 144,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 108,
+                    lineNumber: 134,
                     columnNumber: 9
                 }, this)
         }
@@ -208,7 +225,7 @@ const AdminPage = ()=>{
             children: "Loading..."
         }, void 0, false, {
             fileName: "[project]/components/movie/DeleteMovie.tsx",
-            lineNumber: 132,
+            lineNumber: 158,
             columnNumber: 12
         }, this);
     }
@@ -217,7 +234,7 @@ const AdminPage = ()=>{
             children: error
         }, void 0, false, {
             fileName: "[project]/components/movie/DeleteMovie.tsx",
-            lineNumber: 136,
+            lineNumber: 162,
             columnNumber: 12
         }, this);
     }
@@ -229,7 +246,7 @@ const AdminPage = ()=>{
                 children: "Manage Movies"
             }, void 0, false, {
                 fileName: "[project]/components/movie/DeleteMovie.tsx",
-                lineNumber: 141,
+                lineNumber: 167,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$externals$5d2f$react$2d$data$2d$table$2d$component__$5b$external$5d$__$28$react$2d$data$2d$table$2d$component$2c$__cjs$29$__["default"], {
@@ -247,13 +264,13 @@ const AdminPage = ()=>{
                 ]
             }, void 0, false, {
                 fileName: "[project]/components/movie/DeleteMovie.tsx",
-                lineNumber: 142,
+                lineNumber: 168,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/movie/DeleteMovie.tsx",
-        lineNumber: 140,
+        lineNumber: 166,
         columnNumber: 5
     }, this);
 };

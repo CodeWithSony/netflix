@@ -378,6 +378,11 @@ img, video {
   margin-right: .75rem;
 }
 
+.mx-\[40\%\] {
+  margin-left: 40%;
+  margin-right: 40%;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -491,6 +496,14 @@ img, video {
   height: 2.25rem;
 }
 
+.h-\[200px\] {
+  height: 200px;
+}
+
+.h-\[230px\] {
+  height: 230px;
+}
+
 .h-auto {
   height: auto;
 }
@@ -537,6 +550,18 @@ img, video {
 
 .w-\[100\%\] {
   width: 100%;
+}
+
+.w-\[25\%\] {
+  width: 25%;
+}
+
+.w-\[75\%\] {
+  width: 75%;
+}
+
+.w-\[95\%\] {
+  width: 95%;
 }
 
 .w-auto {
@@ -636,6 +661,10 @@ img, video {
 .gap-x-5 {
   -moz-column-gap: 1.25rem;
   column-gap: 1.25rem;
+}
+
+.gap-y-2 {
+  row-gap: .5rem;
 }
 
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {

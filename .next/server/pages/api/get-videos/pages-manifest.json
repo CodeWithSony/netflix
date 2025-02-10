@@ -1,0 +1,3 @@
+{
+  "/api/get-videos": "pages/api/get-videos.js"
+}

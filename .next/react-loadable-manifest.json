@@ -1,12 +1,4 @@
 {
-  "pages/admin/[tab].js -> ../../components/movie/AddMovie": {
-    "id": "pages/admin/[tab].js -> ../../components/movie/AddMovie",
-    "files": [
-      "static/chunks/node_modules_5f2f57._.js",
-      "static/chunks/components_movie_AddMovie_tsx_bbcb40._.js",
-      "static/chunks/components_movie_AddMovie_tsx_bd64ad._.js"
-    ]
-  },
   "pages/admin/[tab].js -> ../../components/movie/DeleteMovie": {
     "id": "pages/admin/[tab].js -> ../../components/movie/DeleteMovie",
     "files": [
@@ -16,6 +8,14 @@
       "static/chunks/node_modules_bddc7f._.js",
       "static/chunks/components_movie_DeleteMovie_tsx_b35c9c._.js",
       "static/chunks/components_movie_DeleteMovie_tsx_bd64ad._.js"
+    ]
+  },
+  "pages/admin/[tab].js -> ../../components/movie/AddMovie": {
+    "id": "pages/admin/[tab].js -> ../../components/movie/AddMovie",
+    "files": [
+      "static/chunks/node_modules_5f2f57._.js",
+      "static/chunks/components_movie_AddMovie_tsx_bbcb40._.js",
+      "static/chunks/components_movie_AddMovie_tsx_bd64ad._.js"
     ]
   }
 }

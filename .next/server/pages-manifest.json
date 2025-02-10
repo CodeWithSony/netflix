@@ -4,8 +4,7 @@
   "/": "pages/index.js",
   "/admin/[tab]": "pages/admin/[tab].js",
   "/api/auth/session": "pages/api/auth/session.js",
-  "/api/auth/_log": "pages/api/auth/_log.js",
   "/api/movies": "pages/api/movies.js",
-  "/auth": "pages/auth.js",
-  "/api/upload-video": "pages/api/upload-video.js"
+  "/api/auth/_log": "pages/api/auth/_log.js",
+  "/api/get-videos": "pages/api/get-videos.js"
 }
