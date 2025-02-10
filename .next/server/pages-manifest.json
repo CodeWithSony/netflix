@@ -2,9 +2,12 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/admin/[tab]": "pages/admin/[tab].js",
+  "/auth": "pages/auth.js",
   "/api/auth/session": "pages/api/auth/session.js",
-  "/api/movies": "pages/api/movies.js",
   "/api/auth/_log": "pages/api/auth/_log.js",
-  "/api/get-videos": "pages/api/get-videos.js"
+  "/api/auth/login": "pages/api/auth/login.js",
+  "/api/movies": "pages/api/movies.js",
+  "/api/get-videos": "pages/api/get-videos.js",
+  "/admin/[tab]": "pages/admin/[tab].js",
+  "/edit/[id]": "pages/edit/[id].js"
 }

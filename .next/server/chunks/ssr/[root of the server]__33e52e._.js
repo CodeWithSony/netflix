@@ -110,6 +110,7 @@ var __TURBOPACK__imported__module__$5b$externals$5d2f$moment__$5b$external$5d$__
 ;
 ;
 function HomePage() {
+    const [data, setData] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])([]);
     const [movies, setMovies] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])([]);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(true);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])("");
@@ -133,7 +134,6 @@ function HomePage() {
             setLoading(false);
         }
     };
-    // with movei detail will also come
     const fetchMovies = async ()=>{
         try {
             const res = await fetch("/api/movies");
@@ -154,7 +154,7 @@ function HomePage() {
             children: "Loading..."
         }, void 0, false, {
             fileName: "[project]/components/data/MovieData.tsx",
-            lineNumber: 65,
+            lineNumber: 66,
             columnNumber: 12
         }, this);
     }
@@ -163,7 +163,7 @@ function HomePage() {
             children: error
         }, void 0, false, {
             fileName: "[project]/components/data/MovieData.tsx",
-            lineNumber: 69,
+            lineNumber: 70,
             columnNumber: 12
         }, this);
     }
@@ -174,7 +174,7 @@ function HomePage() {
                 children: "Movie List"
             }, void 0, false, {
                 fileName: "[project]/components/data/MovieData.tsx",
-                lineNumber: 74,
+                lineNumber: 75,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -182,7 +182,7 @@ function HomePage() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("ul", {
                         className: "space-y-3 w-[75%]",
-                        children: movies.map((movie)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
+                        children: movies?.map((movie)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
                                 className: "border h-[230px] p-4 flex justify-between",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
@@ -193,7 +193,7 @@ function HomePage() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/data/MovieData.tsx",
-                                        lineNumber: 83,
+                                        lineNumber: 84,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -202,7 +202,7 @@ function HomePage() {
                                                 children: "Cast:"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/data/MovieData.tsx",
-                                                lineNumber: 87,
+                                                lineNumber: 88,
                                                 columnNumber: 17
                                             }, this),
                                             " ",
@@ -210,7 +210,7 @@ function HomePage() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/data/MovieData.tsx",
-                                        lineNumber: 86,
+                                        lineNumber: 87,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -219,7 +219,7 @@ function HomePage() {
                                                 children: "Singer:"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/data/MovieData.tsx",
-                                                lineNumber: 90,
+                                                lineNumber: 91,
                                                 columnNumber: 17
                                             }, this),
                                             " ",
@@ -227,7 +227,7 @@ function HomePage() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/data/MovieData.tsx",
-                                        lineNumber: 89,
+                                        lineNumber: 90,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -236,14 +236,14 @@ function HomePage() {
                                                 children: "Release Date:"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/data/MovieData.tsx",
-                                                lineNumber: 93,
+                                                lineNumber: 94,
                                                 columnNumber: 17
                                             }, this),
                                             (0, __TURBOPACK__imported__module__$5b$externals$5d2f$moment__$5b$external$5d$__$28$moment$2c$__cjs$29$__["default"])(movie.releaseDate).format("MMMM DD, YYYY")
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/data/MovieData.tsx",
-                                        lineNumber: 92,
+                                        lineNumber: 93,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -252,7 +252,7 @@ function HomePage() {
                                                 children: "Budget:"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/data/MovieData.tsx",
-                                                lineNumber: 97,
+                                                lineNumber: 98,
                                                 columnNumber: 17
                                             }, this),
                                             " ",
@@ -260,23 +260,23 @@ function HomePage() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/data/MovieData.tsx",
-                                        lineNumber: 96,
+                                        lineNumber: 97,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, movie._id, true, {
                                 fileName: "[project]/components/data/MovieData.tsx",
-                                lineNumber: 79,
+                                lineNumber: 80,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/components/data/MovieData.tsx",
-                        lineNumber: 77,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("ul", {
                         className: "flex flex-col gap-y-2 w-[25%]",
-                        children: videos.map((video)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                        children: videos?.map((video)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
                                 className: "border p-4",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("video", {
                                     controls: true,
@@ -287,30 +287,30 @@ function HomePage() {
                                             type: "video/mp4"
                                         }, void 0, false, {
                                             fileName: "[project]/components/data/MovieData.tsx",
-                                            lineNumber: 106,
+                                            lineNumber: 107,
                                             columnNumber: 17
                                         }, this),
                                         "Your browser does not support the video tag."
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/data/MovieData.tsx",
-                                    lineNumber: 105,
+                                    lineNumber: 106,
                                     columnNumber: 15
                                 }, this)
                             }, video._id, false, {
                                 fileName: "[project]/components/data/MovieData.tsx",
-                                lineNumber: 104,
+                                lineNumber: 105,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/components/data/MovieData.tsx",
-                        lineNumber: 102,
+                        lineNumber: 103,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/data/MovieData.tsx",
-                lineNumber: 76,
+                lineNumber: 77,
                 columnNumber: 7
             }, this)
         ]

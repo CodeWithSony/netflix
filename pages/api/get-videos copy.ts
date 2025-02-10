@@ -8,11 +8,17 @@ const getVideos = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const videos = await Video.find(); // Make sure this returns an array
-    res.status(200).json(videos); // Correct: Sending an array
+    // Connect to database
+    await dbConnect();
+
+    // Fetch all videos
+    const videos = await Video.find();
+
+    // Return videos
+    return res.status(200).json({ videos });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error", error });
+    console.error("Error fetching videos:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 

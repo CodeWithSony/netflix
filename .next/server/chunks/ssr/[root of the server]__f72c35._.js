@@ -54,126 +54,113 @@ var __turbopack_async_dependencies__ = __turbopack_handle_async_dependencies__([
 ;
 ;
 ;
-const AdminPage = ()=>{
-    const [movies, setMovies] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])([]);
+const MyDataTable = ()=>{
+    const [data, setData] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])([]);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(true);
+    const [movies, setMovies] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])([]);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])("");
-    const [videos, setVideos] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])([]);
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$router$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
     (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useEffect"])(()=>{
-        const fetchMovies = async ()=>{
-            try {
-                const res = await __TURBOPACK__imported__module__$5b$externals$5d2f$axios__$5b$external$5d$__$28$axios$2c$__esm_import$29$__["default"].get("/api/movies");
-                setMovies(res.data);
-            } catch (err) {
-                setError("Error fetching movies.");
-            } finally{
-                setLoading(false);
-            }
-        };
-        fetchMovies();
-        fetchVideos();
+        fetchData();
     }, []);
-    const fetchVideos = async ()=>{
+    const fetchData = async ()=>{
         try {
-            const response = await fetch("/api/get-videos");
-            const data = await response.json();
-            if (response.ok) {
-                setVideos(data.videos);
-            } else {
-                setError(data.error || "Failed to fetch videos");
+            const [moviesResponse, videosResponse] = await Promise.all([
+                fetch("/api/movies").then((res)=>res.json()),
+                fetch("/api/get-videos").then((res)=>res.json())
+            ]);
+            console.log("Movies API Response:", moviesResponse);
+            console.log("Videos API Response:", videosResponse);
+            if (!Array.isArray(videosResponse)) {
+                console.error("videosResponse is not an array. Response:", videosResponse);
+                throw new Error("videosResponse is not an array");
             }
-        } catch (err) {
-            setError("Error fetching videos");
+            const mergedData = moviesResponse?.map((movie)=>{
+                const video = videosResponse.find((v)=>v.movieId === movie._id);
+                return {
+                    ...movie,
+                    videoUrl: video?.videoUrl || ""
+                };
+            });
+            setData(mergedData);
+        } catch (error) {
+            console.error("Error fetching data:", error);
         } finally{
             setLoading(false);
         }
     };
-    const formatCurrancy = (value)=>{
-        return new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD"
-        }).format(value);
-    };
     const handleDelete = async (id)=>{
         try {
-            await __TURBOPACK__imported__module__$5b$externals$5d2f$axios__$5b$external$5d$__$28$axios$2c$__esm_import$29$__["default"].delete(`/api/movies?id=${id}`);
+            const res = await __TURBOPACK__imported__module__$5b$externals$5d2f$axios__$5b$external$5d$__$28$axios$2c$__esm_import$29$__["default"].delete(`/api/movies?id=${id}`);
+            console.log("Delete response:", res.data); // Add this line
             setMovies((prevMovies)=>prevMovies.filter((movie)=>movie._id !== id));
+            fetchData();
         } catch (err) {
-            console.error("Error deleting movie:", err);
-            alert("Error deleting movie. Please try again.");
+            console.error("Error deleting movie:", err.response?.data || err.message);
+            alert(`Error deleting movie: ${err.response?.data?.error || err.message}`);
         }
     };
     const handleEdit = (id)=>{
+        console.log("hello");
         router.push(`/edit/${id}`);
     };
     const columns = [
         {
-            name: "Movie Name",
+            name: "Name",
             selector: (row)=>row.name,
-            sortable: true,
-            wrap: true,
-            cell: (row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                    className: "text-left",
-                    children: row.name
-                }, void 0, false, {
-                    fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 92,
-                    columnNumber: 31
-                }, this)
+            sortable: true
         },
         {
             name: "Singer",
             selector: (row)=>row.singer.join(", "),
-            sortable: true,
-            cell: (row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                    className: "text-left",
-                    children: row.singer.join(", ")
-                }, void 0, false, {
-                    fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 99,
-                    columnNumber: 9
-                }, this)
+            sortable: true
         },
         {
             name: "Cast",
             selector: (row)=>row.cast.join(", "),
-            sortable: true,
-            cell: (row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                    className: "text-left",
-                    children: row.cast.join(", ")
-                }, void 0, false, {
-                    fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 107,
-                    columnNumber: 9
-                }, this)
+            sortable: true
         },
         {
             name: "Release Date",
-            selector: (row)=>(0, __TURBOPACK__imported__module__$5b$externals$5d2f$moment__$5b$external$5d$__$28$moment$2c$__cjs$29$__["default"])(row.releaseDate).format("DD-MM-YYYY"),
-            sortable: true,
-            wrap: true,
-            cell: (row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                    className: "text-left",
-                    children: (0, __TURBOPACK__imported__module__$5b$externals$5d2f$moment__$5b$external$5d$__$28$moment$2c$__cjs$29$__["default"])(row.releaseDate).format("DD-MM-YYYY")
-                }, void 0, false, {
-                    fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 116,
-                    columnNumber: 9
-                }, this)
+            selector: (row)=>new Date(row.releaseDate).toLocaleDateString(),
+            sortable: true
         },
         {
             name: "Budget",
-            sortable: true,
-            right: true,
-            wrap: true,
-            cell: (row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                    className: "text-left",
-                    children: formatCurrancy(row.budget)
+            selector: (row)=>row.budget.toString(),
+            sortable: true
+        },
+        {
+            name: "Release Date",
+            selector: (row)=>(0, __TURBOPACK__imported__module__$5b$externals$5d2f$moment__$5b$external$5d$__$28$moment$2c$__cjs$29$__["default"])(row.releaseDate).format("MMMM DD, YYYY"),
+            sortable: true
+        },
+        {
+            name: "Video",
+            cell: (row)=>row.videoUrl ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("video", {
+                    width: "100",
+                    controls: true,
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("source", {
+                            src: row.videoUrl,
+                            type: "video/mp4"
+                        }, void 0, false, {
+                            fileName: "[project]/components/movie/DeleteMovie.tsx",
+                            lineNumber: 120,
+                            columnNumber: 13
+                        }, this),
+                        "Your browser does not support the video tag."
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/movie/DeleteMovie.tsx",
+                    lineNumber: 119,
+                    columnNumber: 11
+                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                    children: "No Video Available"
                 }, void 0, false, {
                     fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 127,
-                    columnNumber: 9
+                    lineNumber: 124,
+                    columnNumber: 11
                 }, this)
         },
         {
@@ -189,12 +176,12 @@ const AdminPage = ()=>{
                                 className: "mr-1 text-green-500 h-7 w-8"
                             }, void 0, false, {
                                 fileName: "[project]/components/movie/DeleteMovie.tsx",
-                                lineNumber: 141,
+                                lineNumber: 138,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/movie/DeleteMovie.tsx",
-                            lineNumber: 135,
+                            lineNumber: 132,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -204,77 +191,52 @@ const AdminPage = ()=>{
                                 className: "mr-1 text-red-500 h-8 w-8"
                             }, void 0, false, {
                                 fileName: "[project]/components/movie/DeleteMovie.tsx",
-                                lineNumber: 150,
+                                lineNumber: 147,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/movie/DeleteMovie.tsx",
-                            lineNumber: 144,
+                            lineNumber: 141,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/movie/DeleteMovie.tsx",
-                    lineNumber: 134,
+                    lineNumber: 131,
                     columnNumber: 9
                 }, this)
         }
     ];
-    if (loading) {
-        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-            children: "Loading..."
-        }, void 0, false, {
-            fileName: "[project]/components/movie/DeleteMovie.tsx",
-            lineNumber: 158,
-            columnNumber: 12
-        }, this);
-    }
-    if (error) {
-        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-            children: error
-        }, void 0, false, {
-            fileName: "[project]/components/movie/DeleteMovie.tsx",
-            lineNumber: 162,
-            columnNumber: 12
-        }, this);
-    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-        className: "mx-3 p-4 bg-white rounded-lg",
+        className: "p-4",
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
-                className: "text-xl font-semibold text-blue-900",
-                children: "Manage Movies"
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
+                className: "text-xl font-semibold mb-4",
+                children: "Movies & Videos"
             }, void 0, false, {
                 fileName: "[project]/components/movie/DeleteMovie.tsx",
-                lineNumber: 167,
+                lineNumber: 156,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$externals$5d2f$react$2d$data$2d$table$2d$component__$5b$external$5d$__$28$react$2d$data$2d$table$2d$component$2c$__cjs$29$__["default"], {
                 columns: columns,
-                data: movies,
-                pagination: true,
-                responsive: true,
+                data: data,
                 progressPending: loading,
-                paginationRowsPerPageOptions: [
-                    10,
-                    20,
-                    30,
-                    40,
-                    50
-                ]
+                pagination: true,
+                highlightOnHover: true
             }, void 0, false, {
                 fileName: "[project]/components/movie/DeleteMovie.tsx",
-                lineNumber: 168,
+                lineNumber: 157,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/movie/DeleteMovie.tsx",
-        lineNumber: 166,
+        lineNumber: 155,
         columnNumber: 5
     }, this);
 };
-const __TURBOPACK__default__export__ = AdminPage;
+const __TURBOPACK__default__export__ = MyDataTable;
 __turbopack_async_result__();
 } catch(e) { __turbopack_async_result__(e); } }, false);}),
 "[project]/node_modules/@heroicons/react/24/solid/esm/PencilIcon.js [ssr] (ecmascript)": ((__turbopack_context__) => {

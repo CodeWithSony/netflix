@@ -1,131 +1,128 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import DataTable from "react-data-table-component";
+import { useEffect, useState } from "react";
+
+import DataTable, { TableColumn } from "react-data-table-component";
+import React from "react";
+
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import moment from "moment";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-interface Video {
-  _id: string;
-  videoUrl: string;
-  movieId: string;
-}
-
-interface RowData {
+interface Movie {
   _id: string;
   name: string;
-  singer: string[];
-  cast: string[];
-  releaseDate: string;
-  budget: number;
+  cast: [string];
+  singer: [string];
+  budget: string;
+  releaseDate: Date;
+  videoUrl?: string;
 }
-const AdminPage = () => {
-  const [movies, setMovies] = useState<RowData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [videos, setVideos] = useState<Video[]>([]);
 
+const MyDataTable = () => {
+  const [data, setData] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [movies, setMovies] = useState<Movie[]>([]);
+
+  const [error, setError] = useState("");
   const router = useRouter();
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const res = await axios.get("/api/movies");
-        setMovies(res.data);
-      } catch (err) {
-        setError("Error fetching movies.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMovies();
-    fetchVideos();
+    fetchData();
   }, []);
-
-  const fetchVideos = async () => {
+  const fetchData = async () => {
     try {
-      const response = await fetch("/api/get-videos");
-      const data = await response.json();
+      const [moviesResponse, videosResponse] = await Promise.all([
+        fetch("/api/movies").then((res) => res.json()),
+        fetch("/api/get-videos").then((res) => res.json()),
+      ]);
 
-      if (response.ok) {
-        setVideos(data.videos);
-      } else {
-        setError(data.error || "Failed to fetch videos");
+      console.log("Movies API Response:", moviesResponse);
+      console.log("Videos API Response:", videosResponse);
+
+      if (!Array.isArray(videosResponse)) {
+        console.error(
+          "videosResponse is not an array. Response:",
+          videosResponse
+        );
+        throw new Error("videosResponse is not an array");
       }
-    } catch (err) {
-      setError("Error fetching videos");
+
+      const mergedData: Movie[] = moviesResponse?.map((movie: Movie) => {
+        const video = videosResponse.find((v: any) => v.movieId === movie._id);
+        return { ...movie, videoUrl: video?.videoUrl || "" };
+      });
+
+      setData(mergedData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     } finally {
       setLoading(false);
     }
   };
-
-  const formatCurrancy = (value: number): string => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(value);
-  };
-
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`/api/movies?id=${id}`);
+      const res = await axios.delete(`/api/movies?id=${id}`);
+      console.log("Delete response:", res.data); // Add this line
+
       setMovies((prevMovies) => prevMovies.filter((movie) => movie._id !== id));
-    } catch (err) {
-      console.error("Error deleting movie:", err);
-      alert("Error deleting movie. Please try again.");
+      fetchData();
+    } catch (err: any) {
+      console.error("Error deleting movie:", err.response?.data || err.message);
+      alert(
+        `Error deleting movie: ${err.response?.data?.error || err.message}`
+      );
     }
   };
 
   const handleEdit = (id: string) => {
+    console.log("hello");
     router.push(`/edit/${id}`);
   };
 
-  const columns = [
+  const columns: TableColumn<Movie>[] = [
     {
-      name: "Movie Name",
-      selector: (row: RowData) => row.name,
+      name: "Name",
+      selector: (row: Movie) => row.name,
       sortable: true,
-      wrap: true,
-      cell: (row: RowData) => <span className="text-left">{row.name}</span>,
     },
     {
       name: "Singer",
-      selector: (row: RowData) => row.singer.join(", "),
+      selector: (row: Movie) => row.singer.join(", "), // join array to make it a string
       sortable: true,
-      cell: (row: RowData) => (
-        <span className="text-left">{row.singer.join(", ")}</span>
-      ),
     },
     {
       name: "Cast",
-      selector: (row: RowData) => row.cast.join(", "),
+      selector: (row: Movie) => row.cast.join(", "), // join array to make it a string
       sortable: true,
-      cell: (row: RowData) => (
-        <span className="text-left">{row.cast.join(", ")}</span>
-      ),
     },
     {
       name: "Release Date",
-      selector: (row: RowData) => moment(row.releaseDate).format("DD-MM-YYYY"),
+      selector: (row: Movie) => new Date(row.releaseDate).toLocaleDateString(), // format date
       sortable: true,
-      wrap: true,
-      cell: (row: RowData) => (
-        <span className="text-left">
-          {moment(row.releaseDate).format("DD-MM-YYYY")}
-        </span>
-      ),
     },
     {
       name: "Budget",
+      selector: (row: Movie) => row.budget.toString(), // convert to string if needed
       sortable: true,
-      right: true,
-      wrap: true,
-      cell: (row: RowData) => (
-        <span className="text-left">{formatCurrancy(row.budget)}</span>
-      ),
+    },
+    {
+      name: "Release Date",
+      selector: (row: Movie) => moment(row.releaseDate).format("MMMM DD, YYYY"),
+      sortable: true,
+    },
+    {
+      name: "Video",
+      cell: (row: Movie) =>
+        row.videoUrl ? (
+          <video width="100" controls>
+            <source src={row.videoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <span>No Video Available</span>
+        ),
     },
     {
       name: "Actions",
@@ -154,27 +151,18 @@ const AdminPage = () => {
     },
   ];
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   return (
-    <div className="mx-3 p-4 bg-white rounded-lg">
-      <h1 className="text-xl font-semibold text-blue-900">Manage Movies</h1>
+    <div className="p-4">
+      <h2 className="text-xl font-semibold mb-4">Movies & Videos</h2>
       <DataTable
         columns={columns}
-        data={movies}
-        pagination
-        responsive
+        data={data}
         progressPending={loading}
-        paginationRowsPerPageOptions={[10, 20, 30, 40, 50]}
+        pagination
+        highlightOnHover
       />
     </div>
   );
 };
 
-export default AdminPage;
+export default MyDataTable;
